@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --login-purple:#7c73ff;
+    --input-bg:#f3f4ff;
+}
+
+body{
+    margin:0;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:#e8eaff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+}
+
+.login-container{
+    display:flex;
+    width:950px;
+    height:600px;
+    background:white;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 25px 50px -12px rgba(0,0,0,0.15);
+}
+
+.login-form-section{
+    flex:1;
+    padding:60px;
+    display:flex;
+    align-items:center;
+}
+
+.form-box{
+    width:100%;
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.input-group{
+    background:var(--input-bg);
+    display:flex;
+    align-items:center;
+    padding:12px 20px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.input-group input{
+    background:none;
+    border:none;
+    outline:none;
+    width:100%;
+    padding-left:10px;
+}
+
+.btn-primary{
+    width:40%;
+    background:var(--login-purple);
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    margin-top:10px;
+}
+
+.error{
+    color:red;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.login-visual-section{
+    flex:1;
+    background:linear-gradient(135deg,#6366f1,#a855f7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.glass-frame{
+    width:280px;
+    height:380px;
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:40px;
+    overflow:hidden;
+}
+.glass-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+<!-- LEFT SIDE -->
+<div class="login-form-section">
+<div class="form-box">
+
+<h1>LOGIN</h1>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="input-group">
+<span>👤</span>
+<input type="text" name="username" placeholder="Username" required>
+</div>
+
+<div class="input-group">
+<span>🔒</span>
+<input type="password" name="password" placeholder="Password" required>
+</div>
+
+<button type="submit" class="btn-primary">Login Now</button>
+
+</form>
+
+</div>
+</div>
+
+<!-- RIGHT SIDE -->
+<div class="login-visual-section">
+<div class="glass-frame">
+<img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1000">
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
