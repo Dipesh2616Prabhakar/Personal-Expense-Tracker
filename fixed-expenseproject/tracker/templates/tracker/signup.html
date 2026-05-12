@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — SpendWise</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:linear-gradient(135deg,#0d0f1a,#1e1b4b);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:24px;overflow:hidden;display:flex;width:860px;max-width:100%;box-shadow:0 40px 80px rgba(0,0,0,.35)}
+.form-side{flex:1;padding:48px;display:flex;flex-direction:column;justify-content:center}
+.brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:#4f46e5;margin-bottom:28px}
+h2{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:6px}
+.sub{color:#7b80a0;font-size:.9rem;margin-bottom:22px}
+/* Use Django's form error list styling */
+.errorlist{list-style:none;background:#fff1f2;border:1px solid #fecdd3;border-radius:8px;padding:10px 14px;font-size:.83rem;color:#f43f5e;margin-bottom:12px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;font-weight:600;color:#3b3f5c;margin-bottom:6px}
+.field input{width:100%;padding:12px 16px;border:1.5px solid #e4e6f0;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;color:#0d0f1a;background:#fafbff;transition:.18s}
+.field input:focus{outline:none;border-color:#4f46e5;background:#fff}
+.field .helptext{font-size:.74rem;color:#9ca3af;margin-top:4px;line-height:1.4}
+.btn{width:100%;background:#4f46e5;color:#fff;border:none;padding:13px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;transition:.18s}
+.btn:hover{background:#4338ca}
+.switch{margin-top:20px;text-align:center;font-size:.85rem;color:#7b80a0}
+.switch a{color:#4f46e5;font-weight:600;text-decoration:none}
+.visual{flex:1;background:linear-gradient(150deg,#4f46e5,#7c3aed);display:flex;align-items:center;justify-content:center;padding:40px}
+.visual-inner{color:#fff;text-align:center}
+.visual-icon{font-size:4rem;margin-bottom:20px}
+.visual-inner h3{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:12px}
+.visual-inner p{font-size:.9rem;opacity:.7;line-height:1.6}
+@media(max-width:640px){.visual{display:none}.form-side{padding:36px 24px}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="form-side">
+    <div class="brand">SpendWise.</div>
+    <h2>Create account</h2>
+    <p class="sub">Start tracking your finances in seconds.</p>
+
+    <form method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+        {% if field.errors %}
+          <ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+        {% endif %}
+        <div class="field">
+          <label>{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<div class="helptext">{{ field.help_text }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      {% if form.non_field_errors %}
+        <ul class="errorlist">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>
+      {% endif %}
+      <button type="submit" class="btn">Create account</button>
+    </form>
+    <p class="switch">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+  </div>
+  <div class="visual">
+    <div class="visual-inner">
+      <div class="visual-icon">🎯</div>
+      <h3>Your financial goals start here</h3>
+      <p>Join and take the first step toward understanding and controlling your spending.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
